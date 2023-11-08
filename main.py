@@ -4,6 +4,15 @@ import cv2
 
 img = cv2.imread("./data/test.jpg")
 img = ImgPRE(img)
-resize_1 = img.resizing(256, 256, color='gray')
 
-img.imsave(img=resize_1, save_path="./data/", save_name="test_gray.jpg")
+# PRE resizing
+resize_img = img.resizing(256, 256, color='gray')
+
+# PRE sharpening
+sharpening_img = img.sharpening()
+plt.imshow(sharpening_img)
+plt.show()
+
+
+# PRE save
+# img.imsave(img=, save_path="./data/", save_name="test_gray.jpg")

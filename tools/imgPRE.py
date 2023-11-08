@@ -1,10 +1,16 @@
 import cv2
+import numpy as np
 
 
 class ImgPRE:
     def __init__(self, img):
         self.img = img
 
+    # Save image
+    def imsave(self, img=None, save_path='./', save_name='pre.jpg'):
+        cv2.imwrite(save_path + save_name, img)
+
+    # Resizing image
     def resizing(self, x_size, y_size, color=None):
         if color == 'color':
             color_img = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGB)
@@ -15,5 +21,12 @@ class ImgPRE:
         else:
             return cv2.resize(self.img, (x_size, y_size))
 
-    def imsave(self, img=None, save_path='./', save_name='pre.jpg'):
-        cv2.imwrite(save_path + save_name, img)
+    # Sharpen image
+    def sharpening(self, kernel=None):
+        if kernel == None:
+            kernel = np.array([[0, -1, 0],
+                               [-1, 5, -1],
+                               [0, -1, 0]])
+            return cv2.filter2D(self.img, -1, kernel)
+        else:
+            return cv2.filter2D(self.img, kernel)
