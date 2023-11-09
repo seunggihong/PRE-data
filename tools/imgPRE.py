@@ -6,6 +6,9 @@ class ImgPRE:
     def __init__(self, img):
         self.img = img
 
+    def __del__(self):
+        pass
+
     # Save image
     def imsave(self, img=None, save_path='./', save_name='pre.jpg'):
         cv2.imwrite(save_path + save_name, img)
@@ -30,3 +33,18 @@ class ImgPRE:
             return cv2.filter2D(self.img, -1, kernel)
         else:
             return cv2.filter2D(self.img, kernel)
+
+    # Remove background
+
+    # Binarization image
+    def binarization(self):
+        max_output_value = 255
+        neighborhood_size = 99
+        subtract_from_mean = 10
+        img_grey = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
+        return cv2.adaptiveThreshold(img_grey, max_output_value, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, neighborhood_size, subtract_from_mean)
+    # Brightness image
+
+    # Contrast image
+
+    # Image Edge detection
