@@ -2,10 +2,18 @@ import cv2
 import numpy as np
 
 
+# Load image
+def imload(path, color=True):
+    if color:
+        return cv2.cvtColor(cv2.imread(path), cv2.COLOR_BGR2RGB)
+    else:
+        return cv2.imread(path, cv2.COLOR_BGR2GRAY)
+
+
 # Save image
 def imsave(img=None, save_path='./', save_name='pre.jpg'):
     '''
-    Parameter
+    Parameters
     ---------
     * img : image
     * save_path : path 
@@ -17,30 +25,37 @@ def imsave(img=None, save_path='./', save_name='pre.jpg'):
     '''
     cv2.imwrite(save_path + save_name, img)
 
+
 # Resizing image
-
-
-def resizing(img, x_size, y_size, color=None):
+def resizing(img, size, color=None):
     '''
     Resizing Image
     ========
+    Parameters
+    --------
+    * img : image
+    * size : tuple (x, y)
+    * color : gray or color
     '''
     if color == 'color':
         color_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        return cv2.resize(color_img, (x_size, y_size))
+        return cv2.resize(color_img, size)
     elif color == 'gray':
         gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        return cv2.resize(gray_img, (x_size, y_size))
+        return cv2.resize(gray_img, size)
     else:
-        return cv2.resize(img, (x_size, y_size))
+        return cv2.resize(img, size)
+
 
 # Sharpen image
-
-
 def sharpening(img, kernel=None):
     '''
     Sparpening Image
     ========
+    Parameters
+    --------
+    * img : image
+    * kernel : numpy array
     '''
     if kernel == None:
         kernel = np.array([[0, -1, 0],
@@ -50,15 +65,18 @@ def sharpening(img, kernel=None):
     else:
         return cv2.filter2D(img, kernel)
 
+
 # Remove background
 
+
 # Binarization image
-
-
 def binarization(img):
     '''
     Binarization Image
     ========
+    Parameters
+    --------
+    * img : image
     '''
     max_output_value = 255
     neighborhood_size = 99
