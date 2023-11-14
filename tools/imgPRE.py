@@ -66,6 +66,17 @@ def sharpening(img, kernel=None):
         return cv2.filter2D(img, kernel)
 
 
+# Cutting image
+def cutting(img, size=(32, 32), start='center'):
+    x_c = img.shape[0]
+    y_c = img.shape[1]
+    if start == 'center':
+        return img[int((x_c/2)-size[0]/2):int((x_c/2)+size[0]/2), int((y_c/2)-size[1]/2):int((y_c/2)+size[1]/2)]
+    elif start == 'start':
+        return img[:size[0], :size[1]]
+    elif start == 'end':
+        return img[(x_c-size[0]):, (y_c-size[1]):]
+
 # Remove background
 
 
