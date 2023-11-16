@@ -34,8 +34,8 @@ def resizing(img, size, color=None):
     Parameters
     --------
     * img : image
-    * size : tuple (x, y)
-    * color : gray or color
+    * size : (type = tuple) (x, y)
+    * color : (type = str) gray, color
     '''
     if color == 'color':
         color_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -68,6 +68,15 @@ def sharpening(img, kernel=None):
 
 # Cutting image
 def cutting(img, size=(32, 32), start='center'):
+    '''
+    Cutting Image
+    ========
+    Parameters
+    --------
+    * img : image
+    * size : (type = tuple) ( x, y )
+    * start : (type = str) center, start, end
+    '''
     x_c = img.shape[0]
     y_c = img.shape[1]
     if start == 'center':
